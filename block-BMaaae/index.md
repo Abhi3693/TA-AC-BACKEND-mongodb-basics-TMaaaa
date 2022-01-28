@@ -3,7 +3,7 @@ writeCode
 Write code to:-
 
 - create a database named `sports`.
-db.create
+use sports
 
 - list all databases present in local mongod server.
 show dbs
@@ -28,8 +28,20 @@ db.TT.renameCollection("tennis")
 
   
 - check whether a collection is capped or not?
+ db.khokho.isCapped();
+
 - drop all documents from `football` collection.
+ db.football.remove({})
+
 - delete cricket collection completely.
+db.cricket.drop();
+
+
 - delete sports database.
+db.dropDatabase();
+
 - check which database you are connected to ?
+db ===> sports
+
 - connect to test database
+use test
