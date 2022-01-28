@@ -57,8 +57,10 @@ Write code to execute below expressions.
     > db.articles.update({title : "Datta"},{$set: {"author.name":"ABC"}})
 
 11. rename details field to description from all articles in articles collection.
+    db.articles.update({}, {$rename: {details:"description"}},{multi:true})
 
 12. Add additional tag in a specific document.
+    db.users.update({userName:"Steve Ortega"},{$push:{sports: "basketball"}})
 
 13. Update an article's title using $set and without $set.
 
@@ -71,7 +73,8 @@ db.articles.update({title : "Datta"},{title:"MNO"})
 - Write the differences here ?
 
 13. find an article using title and increment it's auhtor's age by 5.
-    db.articles.update({title : "sanmit"},{"author.age" : 30})
+
+    > db.users.update({"userName" : "Steve Ortega"},{$inc: {"age" : 30}})
 
 14. Delete a document using \_id field with `db.COLLECTION_NAME.remove()`.
     db.articles.remove({"\_id" : ObjectId("61f3e2718ce2e194907f01b2")})
@@ -197,9 +200,10 @@ Insert above data into database to perform below queries:-
   db.users.find({gender: "Male", sports:"cricket"}).pretty()
 
 - Update user with extra golf field in sports array whose name is "Steve Ortega".
-  db.users.insert({name:"Steve Ortega"}, {sport:"golf"})
+  db.users.update({name:"Steve Ortega"}, {$push{sport:"golf"}})
 
 - Find all users who play either 'football' or 'cricket'.
-  db.users.find({$or: [{sports:"football"}, {sports:"cricket"}]}).pretty()
+  db.users.find({sports:{$in:["football","cricket"]}}).pretty();
 
 - Find all users whose name includes 'ri' in their name.
+  db.users.find({name:/ri/i})
